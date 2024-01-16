@@ -1,11 +1,11 @@
 // Berisi struktur tabel
 // Bagaimana dtaa kita disimpen di database
 
-import { DataTypes, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 // Untuk koneksi database dari database.js yang config
 import db from "../config/database.js";
 
-const {Dataypes} = Sequelize;
+const {DataTypes} = Sequelize;
 
 const User = db.define('users', {
     name: DataTypes.STRING,
