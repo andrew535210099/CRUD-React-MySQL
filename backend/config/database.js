@@ -4,6 +4,7 @@ const db = new Sequelize('crud_db', 'root', '', {
     host: 'localhost',
     port: 8111,
     dialect: 'mysql',
+    // logging: false,
 })
 
 // db.authenticate()
