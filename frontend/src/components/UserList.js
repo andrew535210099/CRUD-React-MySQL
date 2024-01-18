@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 // Berinteraksi dengan API
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const UserList = () => {
   // Membuat state baru
@@ -24,9 +25,23 @@ const UserList = () => {
     }
   };
 
+  const deleteUser = async (id) => {
+    try {
+      console.log("Deleting user with ID:", id);
+      await axios.delete(`http://localhost:4000/users/${id}`);
+      console.log("User deleted successfully");
+      getUsers();
+    } catch (error) {
+      console.log("Error deleting user");
+    }
+  };
+
   return (
     <div className="columns is-centered mt-5">
       <div className="column is-half">
+        <Link to={`add`} className="button is-success">
+          Add New
+        </Link>
         <table className="table is-striped is-fullwidth">
           <thead>
             <tr>
@@ -46,8 +61,16 @@ const UserList = () => {
                   <td>{user.email}</td>
                   <td>{user.gender}</td>
                   <td>
-                    <button className="button is-small is-info">Edit</button>
-                    <button className="button is-small is-danger">
+                    <Link
+                      to={`edit/${user.id}`}
+                      className="button is-small is-info"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => deleteUser(user.id)}
+                      className="button is-small is-danger"
+                    >
                       Delete
                     </button>
                   </td>
